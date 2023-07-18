@@ -1,11 +1,34 @@
 const express = require("express");
-const app = express();
-const port = 3000;
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 
-app.get("/", (req, res) => {
-    res.send(`Hello world!`);
+const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+    cors: {
+        origin: "http://localhost:3000",
+    },
+});
+const PORT = 4000;
+
+app.get("/test", (req, res) => {
+    res.send(`Express server test`);
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+io.on("connection", (socket) => {
+    console.log(`client connected: ${socket.id}`);
+
+    socket.join(`clock-room`);
+
+    socket.on(`disconnect`, (reason) => {
+        console.log(reason);
+    });
+});
+
+setInterval(() => {
+    io.to(`clock-room`).emit(`time`, new Date());
+}, 1000);
+
+httpServer.listen(PORT, () => {
+    console.log(`listening on localhost:${PORT}`);
 });
