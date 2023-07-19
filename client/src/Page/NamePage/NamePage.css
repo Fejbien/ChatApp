@@ -1,0 +1,18 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrap > label {
+    margin-top: 4em;
+}
+
+.wrap > input {
+    margin: 4em;
+    margin-top: 10px;
+}
+
+.wrap > button {
+    border: 1px solid blue;
+}
