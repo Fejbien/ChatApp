@@ -10,7 +10,6 @@ function ChatPage({ name }) {
         socket.on("connect", () => {
             setIsConnected(true);
             socket.emit("userNameAdd", name);
-            console.log(socket.id);
         });
 
         socket.on("connect_error", () => {
@@ -29,8 +28,11 @@ function ChatPage({ name }) {
     });
 
     return (
-        <div>
-            <Messages messages={messages} />
+        <div className="wrapChatPage">
+            <div className="upperChatPage">
+                <UserList />
+                <Messages messages={messages} />
+            </div>
             <Inputs
                 isConnected={isConnected}
                 setMessages={setMessages}
@@ -40,25 +42,32 @@ function ChatPage({ name }) {
     );
 }
 
+function UserList() {
+    return <div className="usersChatPage">Lista</div>;
+}
+
 function Messages({ messages }) {
     const messagesDivs = messages.map((x, y) => {
         return <p key={y}>{x}</p>;
     });
 
-    return <div>{messagesDivs}</div>;
+    return <div className="messagesChatPage">{messagesDivs}</div>;
 }
 
 function Inputs({ isConnected, setMessages, messages }) {
-    function connect() {
+    function connect(e) {
+        e.preventDefault();
         socket.connect();
     }
 
-    function disconnect() {
+    function disconnect(e) {
+        e.preventDefault();
         socket.disconnect();
     }
 
     function handleSubmit(e) {
         e.preventDefault();
+
         const formData = new FormData(e.target);
         const formJson = Object.fromEntries(formData.entries());
         socket.emit("messageSend", formJson["message"]);
@@ -66,7 +75,7 @@ function Inputs({ isConnected, setMessages, messages }) {
     }
 
     return (
-        <div>
+        <div className="formWrapChatPage">
             <form onSubmit={handleSubmit}>
                 <input name="message" type="text"></input>
                 <button type="submit" disabled={!isConnected}>

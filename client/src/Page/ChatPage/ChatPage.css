@@ -1,0 +1,18 @@
+.wrapChatPage {
+    display: flex;
+    flex-direction: column;
+}
+
+.upperChatPage {
+    display: flex;
+    flex-direction: row;
+}
+
+.usersChatPage {
+}
+
+.messagesChatPage {
+}
+
+.formWrapChatPage {
+}

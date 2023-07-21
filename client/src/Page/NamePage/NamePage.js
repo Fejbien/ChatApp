@@ -10,10 +10,10 @@ function NamePage({ setName }) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit} className="wrap">
-                <label htmlFor="name">Nick</label>
+            <form onSubmit={handleSubmit} className="wrapNamePage">
+                <label htmlFor="name">Your nick:</label>
                 <input name="name" type="text"></input>
-                <button type="submit">Submit</button>
+                <button type="submit">Continue</button>
             </form>
         </div>
     );

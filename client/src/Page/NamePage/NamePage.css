@@ -1,18 +1,51 @@
-.wrap {
+.wrapNamePage {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.wrap > label {
-    margin-top: 4em;
+.wrapNamePage > label {
+    margin-top: 10vh;
+
+    font-size: 5em;
+    color: yellow;
+    -webkit-text-stroke: 2px black;
+    font-family: fantasy;
 }
 
-.wrap > input {
-    margin: 4em;
-    margin-top: 10px;
+.wrapNamePage > input {
+    margin-top: 4vh;
+
+    border: 2px solid black;
+    border-radius: 10px;
+    width: max(25vw, 300px);
+    height: 5vh;
+
+    text-align: center;
+    font-size: 30px;
 }
 
-.wrap > button {
-    border: 1px solid blue;
+.wrapNamePage > button {
+    margin-top: 4vh;
+
+    font-family: "Courier New";
+    color: black;
+    background-color: yellow;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 8em;
+    height: 2em;
+    font-weight: 900;
+    font-size: 30px;
+    padding: 0px;
+
+    transition: background-color 200ms;
+    transition: border-color 200ms;
+    transition: color 10ms;
+}
+
+.wrapNamePage > button:hover {
+    background-color: black;
+    border-color: #ffd60a;
+    color: yellow;
 }
