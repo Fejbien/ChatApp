@@ -35,8 +35,14 @@ io.on("connection", (socket) => {
     });
 
     socket.on(`messageSend`, (message) => {
-        console.log(message);
-        socket.broadcast.emit("messageCast", message);
+        console.log({
+            id: socket.id,
+            message: message,
+        });
+        socket.broadcast.emit("messageCast", {
+            id: socket.id,
+            message: message,
+        });
     });
 });
 

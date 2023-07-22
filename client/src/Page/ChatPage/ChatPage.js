@@ -23,8 +23,8 @@ function ChatPage({ name }) {
         });
     }, [name]);
 
-    socket.on("messageCast", (message) => {
-        setMessages([...messages, message]);
+    socket.on("messageCast", ({ id, message }) => {
+        setMessages([...messages, [id, message]]);
     });
 
     socket.on("allUsers", (users) => {
@@ -35,7 +35,7 @@ function ChatPage({ name }) {
         <div className="wrapChatPage">
             <div className="upperChatPage">
                 <UserList usersMap={users} isConnected={isConnected} />
-                <Messages messages={messages} />
+                <Messages usersMap={users} messages={messages} />
             </div>
             <Inputs
                 isConnected={isConnected}
@@ -66,9 +66,17 @@ function UserList({ usersMap, isConnected }) {
     );
 }
 
-function Messages({ messages }) {
+function Messages({ usersMap, messages }) {
+    // x[0] - User id
+    // x[1] - User message
+    // y    - Id in array
+
     const messagesDivs = messages.map((x, y) => {
-        return <p key={y}>{x}</p>;
+        return (
+            <p key={y}>
+                {usersMap.get(x[0])} : {x[1]}
+            </p>
+        );
     });
 
     return <div className="messagesChatPage">{messagesDivs}</div>;
@@ -91,7 +99,7 @@ function Inputs({ isConnected, setMessages, messages }) {
         e.preventDefault();
 
         socket.emit("messageSend", inputRef.current.value);
-        setMessages([...messages, inputRef.current.value]);
+        setMessages([...messages, [socket.id, inputRef.current.value]]);
 
         inputRef.current.value = "";
     }
