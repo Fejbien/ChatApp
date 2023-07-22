@@ -6,19 +6,27 @@ function Messages({ usersMap, messages, userId }) {
     // y    - Id in array
 
     const messagesDivs = messages.map((x, y) => {
+        const whosMessage = userId === x[0];
+
         const positioning = {
             display: "flex",
-            flexDirection: userId === x[0] ? "row-reverse" : "row",
+            flexDirection: whosMessage ? "row-reverse" : "row",
         };
 
         const looksOfMessage = {
-            backgroundColor: userId === x[0] ? "#0084ff" : "#e4e6eb",
-            color: userId === x[0] ? "white" : "black",
+            backgroundColor: whosMessage ? "#0084ff" : "#e4e6eb",
+            color: whosMessage ? "white" : "black",
         };
+
+        let nick = usersMap.get(x[0]);
+        const message = x[1];
+
+        if (nick === undefined) nick = x[0];
+
         return (
             <div key={y} style={positioning}>
                 <div className="messagesMessage" style={looksOfMessage}>
-                    <b>{usersMap.get(x[0])}:</b> {x[1]}
+                    <b>{nick}:</b> {message}
                 </div>
             </div>
         );

@@ -1,21 +1,26 @@
 import "./UserList.css";
 
-function UserList({ usersMap, isConnected }) {
+function UserList({ usersMap, isConnected, userId }) {
     if (!isConnected)
         return (
             <div className="usersChatPage">
-                <p>You are not connected!</p>
+                <p style={{ fontSize: "2vw" }}>You are not connected!</p>
             </div>
         );
 
     const usersLi = Array.from(usersMap).map(([key, value]) => {
-        return <li key={key}>{value}</li>;
+        if (userId === key) value = value + " (You)";
+        return (
+            <div className="userNote" key={key}>
+                {value}
+            </div>
+        );
     });
 
     return (
         <div className="usersChatPage">
-            <p>List of users:</p>
-            <ul>{usersLi}</ul>
+            <p>Users</p>
+            <div className="userNoteWrap">{usersLi}</div>
         </div>
     );
 }

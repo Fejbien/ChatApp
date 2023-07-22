@@ -40,7 +40,11 @@ function ChatPage({ name }) {
     return (
         <div className="wrapChatPage">
             <div className="upperChatPage">
-                <UserList usersMap={users} isConnected={isConnected} />
+                <UserList
+                    usersMap={users}
+                    isConnected={isConnected}
+                    userId={socket.id}
+                />
                 <Messages
                     usersMap={users}
                     messages={messages}

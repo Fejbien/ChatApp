@@ -1,6 +1,6 @@
 .messagesWindowChatPage {
     height: 60vh;
-    width: 84vw;
+    width: 80vw;
     overflow-y: scroll;
     border: 2px solid red;
     box-sizing: border-box;
