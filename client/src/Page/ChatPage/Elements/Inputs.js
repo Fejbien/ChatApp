@@ -19,6 +19,8 @@ function Inputs({ isConnected, setMessages, messages }) {
     function handleSubmit(e) {
         e.preventDefault();
 
+        if (inputRef.current.value === "") return;
+
         socket.emit("messageSend", inputRef.current.value);
         setMessages([...messages, [socket.id, inputRef.current.value]]);
 

@@ -1,7 +1,18 @@
-.messagesChatPage {
+.messagesWindowChatPage {
     height: 60vh;
     width: 84vw;
     overflow-y: scroll;
     border: 2px solid red;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.messagesMessage {
+    margin-top: 0.2em;
+    padding: 0.5em 1em 0.5em 1em;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    color: inherit;
+    font-size: large;
 }
