@@ -12,15 +12,32 @@
     height: 60vh;
     width: 16vw;
     border: 2px solid blue;
+    box-sizing: border-box;
 }
 
 .messagesChatPage {
     height: 60vh;
-    width: 80vw;
+    width: 84vw;
     overflow-y: scroll;
     border: 2px solid red;
+    box-sizing: border-box;
 }
 
 .formWrapChatPage {
     border: 2px solid orange;
+}
+
+.formWrapChatPage > form > button:disabled {
+    background-color: -internal-light-dark(
+        rgba(239, 239, 239, 0.3),
+        rgba(19, 1, 1, 0.3)
+    );
+    color: -internal-light-dark(
+        rgba(16, 16, 16, 0.3),
+        rgba(255, 255, 255, 0.3)
+    );
+    border-color: -internal-light-dark(
+        rgba(118, 118, 118, 0.3),
+        rgba(195, 195, 195, 0.3)
+    );
 }

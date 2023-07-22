@@ -1,5 +1,5 @@
 import "./ChatPage.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { socket } from "./Socket";
 
 function ChatPage({ name }) {
@@ -75,6 +75,8 @@ function Messages({ messages }) {
 }
 
 function Inputs({ isConnected, setMessages, messages }) {
+    const inputRef = useRef(null);
+
     function connect(e) {
         e.preventDefault();
         socket.connect();
@@ -88,16 +90,16 @@ function Inputs({ isConnected, setMessages, messages }) {
     function handleSubmit(e) {
         e.preventDefault();
 
-        const formData = new FormData(e.target);
-        const formJson = Object.fromEntries(formData.entries());
-        socket.emit("messageSend", formJson["message"]);
-        setMessages([...messages, formJson["message"]]);
+        socket.emit("messageSend", inputRef.current.value);
+        setMessages([...messages, inputRef.current.value]);
+
+        inputRef.current.value = "";
     }
 
     return (
         <div className="formWrapChatPage">
             <form onSubmit={handleSubmit}>
-                <input name="message" type="text"></input>
+                <input name="message" type="text" ref={inputRef}></input>
                 <button type="submit" disabled={!isConnected}>
                     Send
                 </button>
