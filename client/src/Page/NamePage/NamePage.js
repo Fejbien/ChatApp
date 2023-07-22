@@ -12,7 +12,7 @@ function NamePage({ setName }) {
         <div>
             <form onSubmit={handleSubmit} className="wrapNamePage">
                 <label htmlFor="name">Your nick:</label>
-                <input name="name" type="text"></input>
+                <input name="name" type="text" placeholder="Aa"></input>
                 <button type="submit">Continue</button>
             </form>
         </div>
