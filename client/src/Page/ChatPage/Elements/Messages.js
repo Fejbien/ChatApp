@@ -1,10 +1,23 @@
 import "./Messages.css";
 
-function Messages({ usersMap, messages, userId }) {
-    // x[0] - User id
-    // x[1] - User message
-    // y    - Id in array
+import { useRef, useEffect } from "react";
 
+function Messages({ usersMap, messages, userId }) {
+    const scrollingDivRef = useRef(null);
+
+    function scrollToBottom() {
+        const div = scrollingDivRef.current;
+        div.scrollTop = div.scrollHeight;
+    }
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
+
+    // x[0] - User id
+    // x[1] - User nick
+    // x[2] - User message
+    // y    - Id in array
     const messagesDivs = messages.map((x, y) => {
         const whosMessage = userId === x[0];
 
@@ -18,10 +31,8 @@ function Messages({ usersMap, messages, userId }) {
             color: whosMessage ? "white" : "black",
         };
 
-        let nick = usersMap.get(x[0]);
-        const message = x[1];
-
-        if (nick === undefined) nick = x[0];
+        const nick = x[1];
+        const message = x[2];
 
         return (
             <div key={y} style={positioning}>
@@ -32,7 +43,11 @@ function Messages({ usersMap, messages, userId }) {
         );
     });
 
-    return <div className="messagesWindowChatPage">{messagesDivs}</div>;
+    return (
+        <div ref={scrollingDivRef} className="messagesWindowChatPage">
+            {messagesDivs}
+        </div>
+    );
 }
 
 export default Messages;

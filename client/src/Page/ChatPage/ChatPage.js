@@ -11,8 +11,6 @@ function ChatPage({ name }) {
     const [messages, setMessages] = useState([]);
     const [users, setUsers] = useState([]);
 
-    //0084ff
-
     useEffect(() => {
         socket.on("connect", () => {
             setIsConnected(true);
@@ -29,8 +27,8 @@ function ChatPage({ name }) {
         });
     }, [name]);
 
-    socket.on("messageCast", ({ id, message }) => {
-        setMessages([...messages, [id, message]]);
+    socket.on("messageCast", ({ id, nick, message }) => {
+        setMessages([...messages, [id, nick, message]]);
     });
 
     socket.on("allUsers", (users) => {
@@ -55,6 +53,7 @@ function ChatPage({ name }) {
                 isConnected={isConnected}
                 setMessages={setMessages}
                 messages={messages}
+                name={name}
             />
         </div>
     );

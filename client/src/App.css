@@ -9,3 +9,9 @@ body {
     );
     background-size: cover;
 }
+
+.fullHeight {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}

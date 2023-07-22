@@ -1,18 +1,80 @@
 .formWrapChatPage {
-    border: 2px solid orange;
+    position: absolute;
+    bottom: 1em;
+    width: 100vw;
+}
+
+.formWrapChatPage > form {
+    display: flex;
+    justify-content: space-around;
+}
+
+.formWrapChatPage > form > button {
+    box-sizing: border-box;
+    font-family: "Courier New";
+    color: black;
+    background-color: yellow;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 8em;
+    height: 2em;
+    font-weight: 900;
+    font-size: 30px;
+    padding: 0px;
+
+    transition: background-color 200ms;
+    transition: border-color 200ms;
+    transition: color 10ms;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formWrapChatPage > form > button:hover {
+    background-color: black;
+    border-color: #ffd60a;
+    color: yellow;
 }
 
 .formWrapChatPage > form > button:disabled {
-    background-color: -internal-light-dark(
-        rgba(239, 239, 239, 0.3),
-        rgba(19, 1, 1, 0.3)
-    );
-    color: -internal-light-dark(
-        rgba(16, 16, 16, 0.3),
-        rgba(255, 255, 255, 0.3)
-    );
-    border-color: -internal-light-dark(
-        rgba(118, 118, 118, 0.3),
-        rgba(195, 195, 195, 0.3)
-    );
+    background-color: #a6a659;
+    color: #404040;
+    border-color: #000000;
+    pointer-events: none;
+}
+
+.formWrapChatPage > form > input {
+    width: 60vw;
+    font-size: 25px;
+    padding: 2px 1em 2px 1em;
+    border-radius: 25px;
+}
+
+.inputsFakeButton {
+    box-sizing: border-box;
+    font-family: "Courier New";
+    color: black;
+    background-color: yellow;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 8em;
+    height: 2em;
+    font-weight: 900;
+    font-size: 30px;
+    padding: 0px;
+
+    transition: background-color 200ms;
+    transition: border-color 200ms;
+    transition: color 10ms;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputsFakeButton:hover {
+    background-color: black;
+    border-color: #ffd60a;
+    color: yellow;
 }

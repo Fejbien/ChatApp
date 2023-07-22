@@ -37,10 +37,12 @@ io.on("connection", (socket) => {
     socket.on(`messageSend`, (message) => {
         console.log({
             id: socket.id,
+            nick: users.get(socket.id),
             message: message,
         });
         socket.broadcast.emit("messageCast", {
             id: socket.id,
+            nick: users.get(socket.id),
             message: message,
         });
     });

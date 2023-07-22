@@ -1,11 +1,11 @@
 .messagesWindowChatPage {
-    height: 60vh;
+    height: 90vh;
     width: 80vw;
     overflow-y: scroll;
-    border: 2px solid red;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    padding: 1% 5% 0 5%;
 }
 
 .messagesMessage {

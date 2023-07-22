@@ -9,13 +9,13 @@ function App() {
 
     if (name !== "") {
         return (
-            <div>
+            <div className="fullHeight">
                 <ChatPage name={name} />
             </div>
         );
     } else {
         return (
-            <div>
+            <div className="fullHeight">
                 <NamePage setName={setName} />
             </div>
         );

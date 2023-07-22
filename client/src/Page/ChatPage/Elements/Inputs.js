@@ -3,7 +3,7 @@ import "./Inputs.css";
 import { socket } from "../Socket";
 import { useRef } from "react";
 
-function Inputs({ isConnected, setMessages, messages }) {
+function Inputs({ isConnected, setMessages, messages, name }) {
     const inputRef = useRef(null);
 
     function connect(e) {
@@ -22,7 +22,7 @@ function Inputs({ isConnected, setMessages, messages }) {
         if (inputRef.current.value === "") return;
 
         socket.emit("messageSend", inputRef.current.value);
-        setMessages([...messages, [socket.id, inputRef.current.value]]);
+        setMessages([...messages, [socket.id, name, inputRef.current.value]]);
 
         inputRef.current.value = "";
     }
@@ -30,15 +30,24 @@ function Inputs({ isConnected, setMessages, messages }) {
     return (
         <div className="formWrapChatPage">
             <form onSubmit={handleSubmit}>
-                <input name="message" type="text" ref={inputRef}></input>
+                {!isConnected ? (
+                    <div className="inputsFakeButton" onClick={connect}>
+                        Connect
+                    </div>
+                ) : (
+                    <div className="inputsFakeButton" onClick={disconnect}>
+                        Disconnect
+                    </div>
+                )}
+                <input
+                    name="message"
+                    type="text"
+                    ref={inputRef}
+                    placeholder="Aa"
+                ></input>
                 <button type="submit" disabled={!isConnected}>
                     Send
                 </button>
-                {!isConnected ? (
-                    <button onClick={connect}>Connect</button>
-                ) : (
-                    <button onClick={disconnect}>Disconnect</button>
-                )}
             </form>
         </div>
     );
