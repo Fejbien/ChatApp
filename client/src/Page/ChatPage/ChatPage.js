@@ -5,6 +5,7 @@ import { socket } from "./Socket";
 function ChatPage({ name }) {
     const [isConnected, setIsConnected] = useState(socket.connected);
     const [messages, setMessages] = useState([]);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         socket.on("connect", () => {
@@ -23,14 +24,17 @@ function ChatPage({ name }) {
     }, [name]);
 
     socket.on("messageCast", (message) => {
-        console.log(message);
         setMessages([...messages, message]);
+    });
+
+    socket.on("allUsers", (users) => {
+        setUsers(new Map(JSON.parse(users)));
     });
 
     return (
         <div className="wrapChatPage">
             <div className="upperChatPage">
-                <UserList />
+                <UserList usersMap={users} isConnected={isConnected} />
                 <Messages messages={messages} />
             </div>
             <Inputs
@@ -42,8 +46,24 @@ function ChatPage({ name }) {
     );
 }
 
-function UserList() {
-    return <div className="usersChatPage">Lista</div>;
+function UserList({ usersMap, isConnected }) {
+    if (!isConnected)
+        return (
+            <div className="usersChatPage">
+                <p>You are not connected!</p>
+            </div>
+        );
+
+    const usersLi = Array.from(usersMap).map(([key, value]) => {
+        return <li key={key}>{value}</li>;
+    });
+
+    return (
+        <div className="usersChatPage">
+            <p>List of users:</p>
+            <ul>{usersLi}</ul>
+        </div>
+    );
 }
 
 function Messages({ messages }) {

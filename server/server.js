@@ -22,11 +22,15 @@ io.on("connection", (socket) => {
 
     socket.on(`disconnect`, (reason) => {
         users.delete(socket.id);
+
+        io.emit(`allUsers`, JSON.stringify(Array.from(users)));
         console.log(reason);
     });
 
     socket.on(`userNameAdd`, (nick) => {
         users.set(socket.id, nick);
+
+        io.emit(`allUsers`, JSON.stringify(Array.from(users)));
         console.log(socket.id + " : " + nick);
     });
 
@@ -39,10 +43,3 @@ io.on("connection", (socket) => {
 httpServer.listen(PORT, () => {
     console.log(`listening on localhost:${PORT}`);
 });
-
-function ShowAllUsers() {
-    console.log("User list: ");
-    users.forEach((user) => {
-        console.log(user);
-    });
-}

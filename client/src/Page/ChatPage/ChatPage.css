@@ -9,10 +9,18 @@
 }
 
 .usersChatPage {
+    height: 60vh;
+    width: 16vw;
+    border: 2px solid blue;
 }
 
 .messagesChatPage {
+    height: 60vh;
+    width: 80vw;
+    overflow-y: scroll;
+    border: 2px solid red;
 }
 
 .formWrapChatPage {
+    border: 2px solid orange;
 }
