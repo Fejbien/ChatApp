@@ -1,0 +1,6 @@
+.usersChatPage {
+    height: 60vh;
+    width: 16vw;
+    border: 2px solid blue;
+    box-sizing: border-box;
+}

@@ -1,11 +1,17 @@
 import "./ChatPage.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { socket } from "./Socket";
+
+import UserList from "./Elements/UserList";
+import Messages from "./Elements/Messages";
+import Inputs from "./Elements/Inputs";
 
 function ChatPage({ name }) {
     const [isConnected, setIsConnected] = useState(socket.connected);
     const [messages, setMessages] = useState([]);
     const [users, setUsers] = useState([]);
+
+    //0084ff
 
     useEffect(() => {
         socket.on("connect", () => {
@@ -42,81 +48,6 @@ function ChatPage({ name }) {
                 setMessages={setMessages}
                 messages={messages}
             />
-        </div>
-    );
-}
-
-function UserList({ usersMap, isConnected }) {
-    if (!isConnected)
-        return (
-            <div className="usersChatPage">
-                <p>You are not connected!</p>
-            </div>
-        );
-
-    const usersLi = Array.from(usersMap).map(([key, value]) => {
-        return <li key={key}>{value}</li>;
-    });
-
-    return (
-        <div className="usersChatPage">
-            <p>List of users:</p>
-            <ul>{usersLi}</ul>
-        </div>
-    );
-}
-
-function Messages({ usersMap, messages }) {
-    // x[0] - User id
-    // x[1] - User message
-    // y    - Id in array
-
-    const messagesDivs = messages.map((x, y) => {
-        return (
-            <p key={y}>
-                {usersMap.get(x[0])} : {x[1]}
-            </p>
-        );
-    });
-
-    return <div className="messagesChatPage">{messagesDivs}</div>;
-}
-
-function Inputs({ isConnected, setMessages, messages }) {
-    const inputRef = useRef(null);
-
-    function connect(e) {
-        e.preventDefault();
-        socket.connect();
-    }
-
-    function disconnect(e) {
-        e.preventDefault();
-        socket.disconnect();
-    }
-
-    function handleSubmit(e) {
-        e.preventDefault();
-
-        socket.emit("messageSend", inputRef.current.value);
-        setMessages([...messages, [socket.id, inputRef.current.value]]);
-
-        inputRef.current.value = "";
-    }
-
-    return (
-        <div className="formWrapChatPage">
-            <form onSubmit={handleSubmit}>
-                <input name="message" type="text" ref={inputRef}></input>
-                <button type="submit" disabled={!isConnected}>
-                    Send
-                </button>
-                {!isConnected ? (
-                    <button onClick={connect}>Connect</button>
-                ) : (
-                    <button onClick={disconnect}>Disconnect</button>
-                )}
-            </form>
         </div>
     );
 }

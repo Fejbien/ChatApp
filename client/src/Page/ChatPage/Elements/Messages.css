@@ -1,0 +1,7 @@
+.messagesChatPage {
+    height: 60vh;
+    width: 84vw;
+    overflow-y: scroll;
+    border: 2px solid red;
+    box-sizing: border-box;
+}
