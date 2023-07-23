@@ -1,5 +1,7 @@
 import "./UserList.css";
 
+import Popup from "reactjs-popup";
+
 function UserList({ usersMap, isConnected, userId }) {
     if (!isConnected)
         return (
@@ -12,7 +14,13 @@ function UserList({ usersMap, isConnected, userId }) {
         if (userId === key) value = value + " (You)";
         return (
             <div className="userNote" key={key}>
-                {value}
+                <Popup
+                    trigger={<div>{value}</div>}
+                    position={"right center"}
+                    closeOnDocumentClick
+                >
+                    ID: {key}
+                </Popup>
             </div>
         );
     });

@@ -1,6 +1,7 @@
 import "./Messages.css";
 
 import { useRef, useEffect } from "react";
+import Popup from "reactjs-popup";
 
 function Messages({ usersMap, messages, userId }) {
     const scrollingDivRef = useRef(null);
@@ -31,13 +32,25 @@ function Messages({ usersMap, messages, userId }) {
             color: whosMessage ? "white" : "black",
         };
 
+        const id = x[0];
         const nick = x[1];
         const message = x[2];
 
         return (
             <div key={y} style={positioning}>
                 <div className="messagesMessage" style={looksOfMessage}>
-                    <b>{nick}:</b> {message}
+                    <Popup
+                        trigger={
+                            <div>
+                                <b>{nick}:</b> {message}
+                            </div>
+                        }
+                        position={["left center", "right center"]}
+                        closeOnDocumentClick
+                        keepTooltipInside=".messagesWindowChatPage"
+                    >
+                        ID: {id}
+                    </Popup>
                 </div>
             </div>
         );
